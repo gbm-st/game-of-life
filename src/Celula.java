@@ -1,19 +1,38 @@
-public class Celula {
+public class Celula
+{
+
     private boolean vivo;
 
-    public Celula(boolean estado) {
-        vivo = estado;
+    // CONSTANTES
+    static final boolean VIVIR = true;
+    static final boolean MORIR = false;
+
+    public Celula()
+    {
+
+        this.vivo = MORIR;
+
     }
 
-    public boolean isVivo(){
+    public boolean isVivo()
+    {
+
         return vivo;
+
     }
 
-    public void matarCelular(){
-        vivo = false;
+    public void matarCelula()
+    {
+
+        vivo = MORIR;
+
     }
 
-    public void darVidaCelula(){
-        vivo = true;
+    public void darVidaCelula()
+    {
+
+        vivo = VIVIR;
+
     }
+
 }

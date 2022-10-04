@@ -1,22 +1,40 @@
 import java.util.ArrayList;
 
-public class Juego {
-    private ArrayList tableros = new ArrayList<Tablero>();
+public class Juego
+{
 
-    public Tablero crearTablero (){
+    ArrayList<Tablero> tableros;
 
-        return null;
-    }
+    public Juego()
+    {
 
-    public void calcularSiguienteTablero(Tablero tablero){
-
-    }
-
-    public void calcularFinJuego(){
+        tableros = new ArrayList<Tablero>();
 
     }
 
-    public void dibujarTablero(Tablero tablero){
+    public void iniciarJuego(int filas, int columnas, int porcentajeCelulasVivas)
+    {
 
+        Tablero tablero = new Tablero(filas, columnas);
+
+        tablero.crearTablero();
+
+        // Meter un switch para generar manualmente o aleatorio
+        tablero.inicializarTableroAleatorio(porcentajeCelulasVivas);
+
+        tableros.add(tablero);
+
+    }
+
+    public boolean compararTablero() {
+
+        //if()
+        //    return true;
+
+        return false;
+    }
+
+    public void dibujarTablero() {
+        tableros.get(tableros.size() - 1);
     }
 }
