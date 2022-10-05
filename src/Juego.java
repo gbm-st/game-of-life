@@ -25,12 +25,11 @@ public class Juego
 
     }
 
-    public boolean compararTablero() {
-
-        //if()
-        //    return true;
+    public boolean compararTablero()
+    {
 
         return false;
+
     }
 
     public void dibujarTablero()
@@ -54,16 +53,24 @@ public class Juego
 
     }
 
-    public void siguientePartida(int filas, int columnas)
-    {
+    public void siguientePartida(int filas, int columnas) {
 
         Tablero tablero = new Tablero(filas, columnas);
 
         tablero.crearTablero();
 
-        tablero.valorarVidaCelulas();
+        copiarTableroAnterior(tablero, tableros.get(tableros.size() - 1));
+
+        tablero.vidaVecinos();
 
         tableros.add(tablero);
+
+    }
+
+    private void copiarTableroAnterior(Tablero tableroActual, Tablero tableroAnterior)
+    {
+
+        tableroActual.setCelulas(tableroAnterior.getCelulas());
 
     }
 

@@ -5,7 +5,6 @@ public class Main
 
     static final int LIMITE_INFERIOR_TABLERO = 0;
     static final int LIMITE_SUPERIOR_TABLERO = 25;
-
     static final int LIMITE_INFERIOR_PORCENTAJE = 0;
     static final int LIMITE_SUPERIOR_PORCENTAJE = 100;
 
@@ -20,54 +19,45 @@ public class Main
     {
 
         String enter;
-        int filas                  = 0;
-        int columnas               = 0;
-        int porcentajeCelulasVivas = 0;
+        int numeroJuego             = 1;
+        int filas                   = 0;
+        int columnas                = 0;
+        int porcentajeCelulasVivas  = 0;
 
         Juego juego = new Juego();
-        Scanner scanner = new Scanner(System.in);
+        Scanner entrada = new Scanner(System.in);
 
         System.out.println("---------------Game of Life---------------");
+        System.out.println("Juego número: "+ numeroJuego);
 
-        while (true) {
-
-            System.out.print("Ingrese el numero de filas y columnas (0 a 25): ");
+        while (true)
+        {
 
             try
             {
 
-                filas = Integer.parseInt(scanner.nextLine());
+                System.out.print("Ingrese el numero de filas y columnas (0 a 25): ");
+
+                filas = Integer.parseInt(entrada.nextLine());
 
                 if(filas < LIMITE_INFERIOR_TABLERO || filas > LIMITE_SUPERIOR_TABLERO)
                 {
 
-                    System.out.println("Ingrese un número entre el rango de 0 y 25, por favor.");
+                    System.out.println("Ingrese un número entre el rango de 0 y 25, por favor.\n");
                     continue;
 
                 }
 
-            }
-            catch (NumberFormatException num)
-            {
+                columnas = filas;
 
-                System.out.println("Ingrese un número por favor.");
-                continue;
+                System.out.print("Ingrese el porcentaje de células vivas (0 a 100): ");
 
-            }
-
-            columnas = filas;
-
-            System.out.print("Ingrese el porcentaje de células vivas (0 a 100): ");
-
-            try
-            {
-
-                porcentajeCelulasVivas = Integer.parseInt(scanner.nextLine());
+                porcentajeCelulasVivas = Integer.parseInt(entrada.nextLine());
 
                 if(porcentajeCelulasVivas < LIMITE_INFERIOR_PORCENTAJE || porcentajeCelulasVivas > LIMITE_SUPERIOR_PORCENTAJE)
                 {
 
-                    System.out.println("Ingrese un número entre el rango de 0 y 25, por favor.");
+                    System.out.println("Ingrese un número entre el rango de 0 y 100, por favor.\n");
                     continue;
 
                 }
@@ -76,7 +66,7 @@ public class Main
             catch (NumberFormatException num)
             {
 
-                System.out.println("Ingrese un flotante por favor.");
+                System.out.println("Ingrese un número por favor.\n");
                 continue;
 
             }
@@ -85,20 +75,25 @@ public class Main
 
         }
 
+        numeroJuego++;
+
         juego.iniciarJuego(filas, columnas, porcentajeCelulasVivas);
         juego.dibujarTablero();
 
         while (!juego.compararTablero())
         {
 
-            System.out.println("Presione enter para continuar, presione 1 para salir: ");
-            enter = scanner.nextLine();
+            System.out.print("Presione cualquier tecla para continuar, presione 1 para salir: ");
+            enter = entrada.nextLine();
 
             if(enter.equals("1"))
                 break;
 
             juego.siguientePartida(filas, columnas);
+            System.out.println("Juego número: "+ numeroJuego);
             juego.dibujarTablero();
+
+            numeroJuego++;
 
         }
 
