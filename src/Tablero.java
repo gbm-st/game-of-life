@@ -34,6 +34,32 @@ public class Tablero
 
     }
 
+    public void mostrarTablero()
+    {
+
+        for(int i  = 0; i < celulas.length; i++)
+        {
+
+            for(int j = 0; j < celulas[i].length; j++)
+            {
+
+                String caracter;
+
+                if(celulas[i][j].isVivo())
+                    caracter = "🦠";
+                else
+                    caracter = "☠";
+
+                System.out.print("\t"+caracter+"\t");
+
+            }
+
+            System.out.println("\n\t〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️〰️\t");
+
+        }
+
+    }
+
     public void inicializarTableroAleatorio(int porcentajeCelulasVivas) {
 
         int contadorCelulas = 1;
@@ -43,8 +69,8 @@ public class Tablero
 
         while (contadorCelulas <= porcentajeCelulasVivas){
 
-            columna = aleatorio.nextInt(0, columnas - 1);
-            fila    = aleatorio.nextInt(0, filas - 1);
+            columna = aleatorio.nextInt(columnas);
+            fila    = aleatorio.nextInt(filas);
 
             if(!celulas[columna][fila].isVivo())
             {
@@ -56,4 +82,48 @@ public class Tablero
 
         }
     }
+
+    public void valorarVidaCelulas()
+    {
+
+        for(int i  = 0; i < celulas.length; i++)
+        {
+
+            for(int j = 0; j < celulas[i].length; j++)
+            {
+
+                if(i == 0)
+                {
+
+
+
+                }
+
+                if(j == 0)
+                {
+
+
+
+                }
+
+                if(i == celulas.length)
+                {
+
+
+
+                }
+
+                if(j == celulas.length)
+                {
+
+
+
+                }
+
+            }
+
+        }
+
+    }
+
 }

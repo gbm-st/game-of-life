@@ -19,8 +19,7 @@ public class Juego
 
         tablero.crearTablero();
 
-        // Meter un switch para generar manualmente o aleatorio
-        tablero.inicializarTableroAleatorio(porcentajeCelulasVivas);
+        tablero.inicializarTableroAleatorio(obtenerPorcentaje(filas, columnas, porcentajeCelulasVivas));
 
         tableros.add(tablero);
 
@@ -34,7 +33,38 @@ public class Juego
         return false;
     }
 
-    public void dibujarTablero() {
-        tableros.get(tableros.size() - 1);
+    public void dibujarTablero()
+    {
+
+        Tablero tablero = tableros.get(tableros.size() - 1);
+
+        tablero.mostrarTablero();
+
     }
+
+    public int obtenerPorcentaje(int filas, int columnas, int porcentajeCelulasVivas)
+    {
+
+        double dimensiones = (double) filas * columnas;
+        double porcentaje  = (double) porcentajeCelulasVivas / 100;
+
+        double operacion = dimensiones * porcentaje;
+
+        return (int) Math.round(operacion);
+
+    }
+
+    public void siguientePartida(int filas, int columnas)
+    {
+
+        Tablero tablero = new Tablero(filas, columnas);
+
+        tablero.crearTablero();
+
+        tablero.valorarVidaCelulas();
+
+        tableros.add(tablero);
+
+    }
+
 }
