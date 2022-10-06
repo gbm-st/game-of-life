@@ -38,9 +38,9 @@ public class Main
 
                 System.out.print("Ingrese el numero de filas y columnas (0 a 25): ");
 
-                filas = Integer.parseInt(entrada.nextLine());
+                columnas = Integer.parseInt(entrada.nextLine());
 
-                if(filas < LIMITE_INFERIOR_TABLERO || filas > LIMITE_SUPERIOR_TABLERO)
+                if(columnas < LIMITE_INFERIOR_TABLERO || columnas > LIMITE_SUPERIOR_TABLERO)
                 {
 
                     System.out.println("Ingrese un número entre el rango de 0 y 25, por favor.\n");
@@ -48,7 +48,7 @@ public class Main
 
                 }
 
-                columnas = filas;
+                filas = columnas;
 
                 System.out.print("Ingrese el porcentaje de células vivas (0 a 100): ");
 
@@ -77,7 +77,7 @@ public class Main
 
         numeroJuego++;
 
-        juego.iniciarJuego(filas, columnas, porcentajeCelulasVivas);
+        juego.iniciarJuego(columnas, filas, porcentajeCelulasVivas);
         juego.dibujarTablero();
 
         while (!juego.compararTablero())
@@ -89,7 +89,7 @@ public class Main
             if(enter.equals("1"))
                 break;
 
-            juego.siguientePartida(filas, columnas);
+            juego.siguientePartida(columnas, filas);
             System.out.println("Juego número: "+ numeroJuego);
             juego.dibujarTablero();
 

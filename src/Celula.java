@@ -21,6 +21,13 @@ public class Celula
 
     }
 
+    public void setVivo(boolean vivo)
+    {
+
+        this.vivo = vivo;
+
+    }
+
     public void matarCelula()
     {
 

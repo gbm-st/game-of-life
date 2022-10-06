@@ -12,14 +12,14 @@ public class Juego
 
     }
 
-    public void iniciarJuego(int filas, int columnas, int porcentajeCelulasVivas)
+    public void iniciarJuego(int columnas, int filas, int porcentajeCelulasVivas)
     {
 
-        Tablero tablero = new Tablero(filas, columnas);
+        Tablero tablero = new Tablero(columnas, filas);
 
         tablero.crearTablero();
 
-        tablero.inicializarTableroAleatorio(obtenerPorcentaje(filas, columnas, porcentajeCelulasVivas));
+        tablero.inicializarTableroAleatorio(obtenerPorcentaje(columnas, filas, porcentajeCelulasVivas));
 
         tableros.add(tablero);
 
@@ -41,10 +41,10 @@ public class Juego
 
     }
 
-    public int obtenerPorcentaje(int filas, int columnas, int porcentajeCelulasVivas)
+    public int obtenerPorcentaje(int columnas, int filas, int porcentajeCelulasVivas)
     {
 
-        double dimensiones = (double) filas * columnas;
+        double dimensiones = (double) columnas * filas;
         double porcentaje  = (double) porcentajeCelulasVivas / 100;
 
         double operacion = dimensiones * porcentaje;
@@ -53,24 +53,17 @@ public class Juego
 
     }
 
-    public void siguientePartida(int filas, int columnas) {
+    public void siguientePartida(int columnas, int filas) {
 
-        Tablero tablero = new Tablero(filas, columnas);
+        Tablero tablero = new Tablero(columnas, filas);
 
         tablero.crearTablero();
 
-        copiarTableroAnterior(tablero, tableros.get(tableros.size() - 1));
+        tablero.copiarTableroAnterior(tableros.get(tableros.size() - 1));
 
         tablero.vidaVecinos();
 
         tableros.add(tablero);
-
-    }
-
-    private void copiarTableroAnterior(Tablero tableroActual, Tablero tableroAnterior)
-    {
-
-        tableroActual.setCelulas(tableroAnterior.getCelulas());
 
     }
 
