@@ -23,6 +23,7 @@ public class Main
         int filas                   = 0;
         int columnas                = 0;
         int porcentajeCelulasVivas  = 0;
+        char manual                 = 'N';
 
         Juego juego = new Juego();
         Scanner entrada = new Scanner(System.in);
@@ -71,13 +72,25 @@ public class Main
 
             }
 
+            System.out.print("¿Desea introducir las celulas de manera manual (Y/N)");
+
+            manual = Character.toUpperCase(entrada.next().charAt(0));
+
+            if(Character.toUpperCase(manual) != 'Y' && Character.toUpperCase(manual) != 'N')
+            {
+
+                System.out.println("Ingrese un valor entre Y/N.\n");
+                continue;
+
+            }
+
             break;
 
         }
 
         numeroJuego++;
 
-        juego.iniciarJuego(columnas, filas, porcentajeCelulasVivas);
+        juego.iniciarJuego(columnas, filas, porcentajeCelulasVivas, manual);
         juego.dibujarTablero();
 
         while (!juego.compararTablero())

@@ -1,4 +1,5 @@
 import java.security.SecureRandom;
+import java.util.Scanner;
 
 public class Tablero
 {
@@ -30,25 +31,30 @@ public class Tablero
 
     }
 
-    public void crearTablero()
+    public static boolean compararCelulasTableros(Celula[][] tableroActual, Celula[][] tablerosAnteriores)
     {
 
-        for(int i  = 0; i < celulas.length; i++)
-        {
+        boolean iguales = true;
 
-            for(int j = 0; j < celulas[i].length; j++)
+        for (int i = 0; i < tableroActual.length; i++)
+            for(int j = 0; j < tableroActual[i].length; j++)
             {
 
-                Celula celula = new Celula();
-                celulas[i][j] = celula;
+                if(tableroActual[i][j] != tablerosAnteriores[i][j])
+                {
+
+                    iguales = false;
+                    break;
+
+                }
 
             }
 
-        }
+        return iguales;
 
     }
 
-    public void mostrarTablero()
+    public static void mostrarCelulasTablero(Celula[][] celulas)
     {
 
         for(int i  = 0; i < celulas.length; i++)
@@ -69,6 +75,24 @@ public class Tablero
             }
 
             System.out.println();
+
+        }
+
+    }
+
+    public void llenarTablero(Celula[][] celulas)
+    {
+
+        for(int i  = 0; i < celulas.length; i++)
+        {
+
+            for(int j = 0; j < celulas[i].length; j++)
+            {
+
+                Celula celula = new Celula();
+                celulas[i][j] = celula;
+
+            }
 
         }
 
@@ -99,6 +123,69 @@ public class Tablero
         }
     }
 
+    public void inicializarTableroManual(int celulasRevivir)
+    {
+
+        int contadorCelulas = 1;
+        Scanner entrada = new Scanner(System.in);
+        int columna;
+        int fila;
+
+        while (contadorCelulas <= celulasRevivir)
+        {
+
+            System.out.println(contadorCelulas +" celulas de "+ celulasRevivir);
+
+            try
+            {
+
+                System.out.print("Introduzca la coordenada X del elemento "+ contadorCelulas +": ");
+                columna = Integer.parseInt(entrada.nextLine());
+
+                if(columna < 0 || columna > celulas.length - 1)
+                {
+
+                    System.out.println("Ingrese un número entre 0 y "+ (celulas.length - 1) +", por favor.\n");
+                    continue;
+
+                }
+
+                System.out.print("Introduzca la coordenada Y del elemento "+ contadorCelulas +": ");
+                fila = Integer.parseInt(entrada.nextLine());
+
+                if(fila < 0 || fila > celulas.length - 1)
+                {
+
+                    System.out.println("Ingrese un número entre 0 y "+ (celulas.length - 1) +", por favor.\n");
+                    continue;
+
+                }
+
+            }
+            catch (NumberFormatException num)
+            {
+
+                System.out.println("Ingrese un número por favor.\n");
+                continue;
+
+            }
+
+
+            if(celulas[columna][fila].isVivo())
+            {
+
+               System.out.println("La celula ya se encuentra viva, favor de introducir otras coordenadas.");
+               continue;
+
+            }
+
+            celulas[columna][fila].darVidaCelula();
+            contadorCelulas++;
+
+        }
+
+    }
+
     public void vidaVecinos()
     {
 
@@ -106,6 +193,8 @@ public class Tablero
         final int ULTIMA    = celulas.length - 1;
 
         Celula[][] temporarlCelulas = new Celula[columnas][filas];
+
+        llenarTablero(temporarlCelulas);
 
         copiarCelulas(celulas, temporarlCelulas);
 
@@ -374,74 +463,19 @@ public class Tablero
 
         }
 
-        System.out.println("Original");
-
-        for(int i  = 0; i < celulas.length; i++)
-        {
-
-            for(int j = 0; j < celulas[i].length; j++)
-            {
-
-                String caracter;
-
-                if(celulas[i][j].isVivo())
-                    caracter = "🦠";
-                else
-                    caracter = "☠";
-
-                System.out.print("\t"+caracter+"\t");
-
-            }
-
-            System.out.println();
-
-        }
-
-        System.out.println("Termina original");
-
-        System.out.println("Copia");
-
-        for(int i  = 0; i < temporarlCelulas.length; i++)
-        {
-
-            for(int j = 0; j < temporarlCelulas[i].length; j++)
-            {
-
-                String caracter;
-
-                if(temporarlCelulas[i][j].isVivo())
-                    caracter = "🦠";
-                else
-                    caracter = "☠";
-
-                System.out.print("\t"+caracter+"\t");
-
-            }
-
-            System.out.println();
-
-        }
-
-        System.out.println("Termina copia");
-
         copiarCelulas(temporarlCelulas, celulas);
 
     }
 
-    private void copiarCelulas(Celula[][] original, Celula[][] copia)
+    private void copiarCelulas(Celula[][] origen, Celula[][] destino)
     {
 
-        for(int i = 0; i < original.length; i++)
-        {
+        final boolean vivo      = true;
+        final boolean muerto    = false;
 
-            for(int j = 0; j < original[i].length; j++)
-            {
-
-                copia[i][j].setVivo(original[i][j].isVivo());
-
-            }
-
-        }
+       for (int i = 0; i < origen.length; i++)
+           for(int j = 0; j < origen[i].length; j++)
+               destino[i][j].setVivo(origen[i][j].isVivo() ? vivo : muerto);
 
     }
 
@@ -475,10 +509,10 @@ public class Tablero
 
     }
 
-    public void copiarTableroAnterior(Tablero tablero)
+    public void copiarCelulasTableroAnterior(Tablero original, Tablero copia)
     {
 
-        copiarCelulas(tablero.getCelulas(), celulas);
+        copiarCelulas(original.getCelulas(), copia.getCelulas());
 
     }
 

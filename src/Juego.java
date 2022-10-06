@@ -12,14 +12,17 @@ public class Juego
 
     }
 
-    public void iniciarJuego(int columnas, int filas, int porcentajeCelulasVivas)
+    public void iniciarJuego(int columnas, int filas, int porcentajeCelulasVivas, char manual)
     {
 
         Tablero tablero = new Tablero(columnas, filas);
 
-        tablero.crearTablero();
+        tablero.llenarTablero(tablero.getCelulas());
 
-        tablero.inicializarTableroAleatorio(obtenerPorcentaje(columnas, filas, porcentajeCelulasVivas));
+        if(manual == 'Y')
+            tablero.inicializarTableroAleatorio(obtenerCelulasRevivir(columnas, filas, porcentajeCelulasVivas));
+        else
+            tablero.inicializarTableroManual(obtenerCelulasRevivir(columnas, filas, porcentajeCelulasVivas));
 
         tableros.add(tablero);
 
@@ -28,20 +31,39 @@ public class Juego
     public boolean compararTablero()
     {
 
-        return false;
+        try
+        {
+
+            // Iteramos desde el penúltimo al último tablero
+            for (int i = tableros.size() - 3; i < tableros.size() - 1; i++)
+            {
+
+                if(!Tablero.compararCelulasTableros(tableros.get(tableros.size() - 1).getCelulas(), tableros.get(i).getCelulas()))
+                    return false;
+
+            }
+
+            return true;
+
+        }
+        catch (ArrayIndexOutOfBoundsException e) // Si no existe el indice que intentamos acceder
+        {
+
+            return false;
+
+        }
 
     }
 
     public void dibujarTablero()
     {
 
-        Tablero tablero = tableros.get(tableros.size() - 1);
-
-        tablero.mostrarTablero();
+        // Obtenemos el último tablero
+        Tablero.mostrarCelulasTablero(tableros.get(tableros.size() - 1).getCelulas());
 
     }
 
-    public int obtenerPorcentaje(int columnas, int filas, int porcentajeCelulasVivas)
+    public int obtenerCelulasRevivir(int columnas, int filas, int porcentajeCelulasVivas)
     {
 
         double dimensiones = (double) columnas * filas;
@@ -53,13 +75,15 @@ public class Juego
 
     }
 
-    public void siguientePartida(int columnas, int filas) {
+    public void siguientePartida(int columnas, int filas)
+    {
 
         Tablero tablero = new Tablero(columnas, filas);
 
-        tablero.crearTablero();
+        tablero.llenarTablero(tablero.getCelulas());
 
-        tablero.copiarTableroAnterior(tableros.get(tableros.size() - 1));
+        // Obtenemos el último tablero y el tablero actual
+        tablero.copiarCelulasTableroAnterior(tableros.get(tableros.size() - 1), tablero);
 
         tablero.vidaVecinos();
 
