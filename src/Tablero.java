@@ -140,9 +140,9 @@ public class Tablero
             {
                 try{
                     System.out.print("Introduzca la coordenada X del elemento "+ contadorCelulas +": ");
-                    fila = Integer.parseInt(entrada.nextLine());
+                    columna = Integer.parseInt(entrada.nextLine());
 
-                    if(fila < 0 || fila > celulas.length - 1)
+                    if(columna < 0 || columna > celulas.length - 1)
                     {
 
                         System.out.println("Ingrese un número entre 0 y "+ (celulas.length - 1) +", por favor.\n");
@@ -163,9 +163,9 @@ public class Tablero
             {
                 try{
                     System.out.print("Introduzca la coordenada Y del elemento "+ contadorCelulas +": ");
-                    columna = Integer.parseInt(entrada.nextLine());
+                    fila = Integer.parseInt(entrada.nextLine());
 
-                    if(columna < 0 || columna > celulas.length - 1)
+                    if(fila < 0 || fila > celulas.length - 1)
                     {
 
                         System.out.println("Ingrese un número entre 0 y "+ (celulas.length - 1) +", por favor.\n");
@@ -182,7 +182,7 @@ public class Tablero
                 }
             }
 
-            if(celulas[columna][fila].isVivo())
+            if(celulas[fila][columna].isVivo())
             {
 
                System.out.println("La celula ya se encuentra viva, favor de introducir otras coordenadas.");
@@ -190,7 +190,7 @@ public class Tablero
 
             }
 
-            celulas[columna][fila].darVidaCelula();
+            celulas[fila][columna].darVidaCelula();
             contadorCelulas++;
 
         }
@@ -218,107 +218,105 @@ public class Tablero
                 int celulasVecinasVivas     = 0;
                 int celulasVecinasMuertas   = 0;
 
-                //int centroI = i;
-                //int centroJ = i;
-                int derecha     = i + 1;
-                int abajo       = j + 1;
-                int izquierda   = i - 1;
-                int arriba      = j - 1;
+                int derecha     = j + 1;
+                int abajo       = i + 1;
+                int izquierda   = j - 1;
+                int arriba      = i - 1;
 
                 if(i == PRIMERA && j == PRIMERA) // Esquina arriba-izquierda
                 {
 
-                    if(celulas[derecha][j].isVivo())  // Derecha
+                    if(celulas[i][derecha].isVivo())  // Derecha
                         celulasVecinasVivas++;
                     else
                         celulasVecinasMuertas++;
 
-                    if(celulas[derecha][abajo].isVivo()) // Derecha-Abajo
+                    if(celulas[abajo][derecha].isVivo()) // Abajo-Derecha
                         celulasVecinasVivas++;
                     else
                         celulasVecinasMuertas++;
 
-                    if(celulas[i][abajo].isVivo()) // Abajo
-                        celulasVecinasVivas++;
-                    else
-                        celulasVecinasMuertas++;
-
-                }
-
-                if(j == PRIMERA && (i != PRIMERA && i != ULTIMA)) // Orilla superior, pero no es la primera ni última
-                {
-
-                    if( celulas[derecha][j].isVivo()) // Derecha
-                        celulasVecinasVivas++;
-                    else
-                        celulasVecinasMuertas++;
-
-                    if( celulas[derecha][abajo].isVivo()) // Derecha-Abajo
-                        celulasVecinasVivas++;
-                    else
-                        celulasVecinasMuertas++;
-
-                    if( celulas[i][abajo].isVivo()) // Abajo
-                        celulasVecinasVivas++;
-                    else
-                        celulasVecinasMuertas++;
-
-                    if( celulas[izquierda][abajo].isVivo()) // Izquierda-Abajo
-                        celulasVecinasVivas++;
-                    else
-                        celulasVecinasMuertas++;
-
-                    if( celulas[izquierda][j].isVivo()) // Izquierda
+                    if(celulas[abajo][j].isVivo()) // Abajo
                         celulasVecinasVivas++;
                     else
                         celulasVecinasMuertas++;
 
                 }
 
-                if(i == ULTIMA && j == PRIMERA) // Esquina arriba-derecha
+                if(i == PRIMERA && (j != PRIMERA && j != ULTIMA)) // Orilla superior, pero no es la primera ni última
                 {
 
-                    if(celulas[i][abajo].isVivo())  // Abajo
+                    if( celulas[i][derecha].isVivo()) // Derecha
                         celulasVecinasVivas++;
                     else
                         celulasVecinasMuertas++;
 
-                    if(celulas[izquierda][abajo].isVivo())  // Izquierda-Abajo
+                    if( celulas[abajo][derecha].isVivo()) // Abajo-Derecha
                         celulasVecinasVivas++;
                     else
                         celulasVecinasMuertas++;
 
-                    if(celulas[izquierda][j].isVivo()) // Izquierda
+                    if( celulas[abajo][j].isVivo()) // Abajo
+                        celulasVecinasVivas++;
+                    else
+                        celulasVecinasMuertas++;
+
+                    if( celulas[abajo][izquierda].isVivo()) // Abajo-Izquierda
+                        celulasVecinasVivas++;
+                    else
+                        celulasVecinasMuertas++;
+
+                    if( celulas[i][izquierda].isVivo()) // Izquierda
                         celulasVecinasVivas++;
                     else
                         celulasVecinasMuertas++;
 
                 }
 
-                if(i == ULTIMA && (j != PRIMERA && j != ULTIMA)) // Orilla derecha, pero no es la primera ni última
+                if(i == PRIMERA && j == ULTIMA) // Esquina arriba-derecha
                 {
 
-                    if(celulas[i][abajo].isVivo()) // Abajo
+                    if(celulas[abajo][j].isVivo())  // Abajo
                         celulasVecinasVivas++;
                     else
                         celulasVecinasMuertas++;
 
-                    if(celulas[izquierda][abajo].isVivo()) // Izquierda-Abajo
+                    if(celulas[abajo][izquierda].isVivo())  // Abajo-Izquierda
                         celulasVecinasVivas++;
                     else
                         celulasVecinasMuertas++;
 
-                    if(celulas[izquierda][j].isVivo()) // Izquierda
+                    if(celulas[i][izquierda].isVivo()) // Izquierda
                         celulasVecinasVivas++;
                     else
                         celulasVecinasMuertas++;
 
-                    if(celulas[izquierda][arriba].isVivo()) // Izquierda-Arriba
+                }
+
+                if(j == ULTIMA && (i != PRIMERA && i != ULTIMA)) // Orilla derecha, pero no es la primera ni última
+                {
+
+                    if(celulas[abajo][j].isVivo()) // Abajo
                         celulasVecinasVivas++;
                     else
                         celulasVecinasMuertas++;
 
-                    if(celulas[i][arriba].isVivo()) // Arriba
+                    if(celulas[abajo][izquierda].isVivo()) // Abajo-Izquierda
+                        celulasVecinasVivas++;
+                    else
+                        celulasVecinasMuertas++;
+
+                    if(celulas[i][izquierda].isVivo()) // Izquierda
+                        celulasVecinasVivas++;
+                    else
+                        celulasVecinasMuertas++;
+
+                    if(celulas[arriba][izquierda].isVivo()) // Arriba-Izquierda
+                        celulasVecinasVivas++;
+                    else
+                        celulasVecinasMuertas++;
+
+                    if(celulas[arriba][j].isVivo()) // Arriba
                         celulasVecinasVivas++;
                     else
                         celulasVecinasMuertas++;
@@ -328,97 +326,97 @@ public class Tablero
                 if(i == ULTIMA && j == ULTIMA) // Esquina abajo-derecho
                 {
 
-                    if(celulas[izquierda][j].isVivo()) // Izquierda
+                    if(celulas[i][izquierda].isVivo()) // Izquierda
                         celulasVecinasVivas++;
                     else
                         celulasVecinasMuertas++;
 
-                    if(celulas[izquierda][arriba].isVivo()) // Izquierda-Arriba
+                    if(celulas[arriba][izquierda].isVivo()) // Arriba-Izquierda
                         celulasVecinasVivas++;
                     else
                         celulasVecinasMuertas++;
 
-                    if(celulas[i][arriba].isVivo()) // Arriba
-                        celulasVecinasVivas++;
-                    else
-                        celulasVecinasMuertas++;
-
-                }
-
-                if(j == ULTIMA && (i != PRIMERA && i != ULTIMA)) // Orilla inferior, pero no es la primera ni última
-                {
-
-                    if(celulas[derecha][j].isVivo()) // Derecha
-                        celulasVecinasVivas++;
-                    else
-                        celulasVecinasMuertas++;
-
-                    if(celulas[izquierda][j].isVivo()) // Izquierda
-                        celulasVecinasVivas++;
-                    else
-                        celulasVecinasMuertas++;
-
-                    if(celulas[izquierda][arriba].isVivo())  // Izquierda-Arriba
-                        celulasVecinasVivas++;
-                    else
-                        celulasVecinasMuertas++;
-
-                    if(celulas[i][arriba].isVivo()) // Arriba
-                        celulasVecinasVivas++;
-                    else
-                        celulasVecinasMuertas++;
-
-                    if(celulas[izquierda][arriba].isVivo()) // Izquierda-Arriba
+                    if(celulas[arriba][j].isVivo()) // Arriba
                         celulasVecinasVivas++;
                     else
                         celulasVecinasMuertas++;
 
                 }
 
-                if(i == PRIMERA && j == ULTIMA) // Esquina abajo-izquierda
+                if(i == ULTIMA && (j != PRIMERA && j != ULTIMA)) // Orilla inferior, pero no es la primera ni última
                 {
 
-                    if(celulas[derecha][j].isVivo()) // Derecha
+                    if(celulas[i][derecha].isVivo()) // Derecha
                         celulasVecinasVivas++;
                     else
                         celulasVecinasMuertas++;
 
-                    if(celulas[i][arriba].isVivo()) // Arriba
+                    if(celulas[i][izquierda].isVivo()) // Izquierda
                         celulasVecinasVivas++;
                     else
                         celulasVecinasMuertas++;
 
-                    if(celulas[derecha][arriba].isVivo()) // Derecha-Arriba
+                    if(celulas[arriba][izquierda].isVivo())  // Arriba-Izquierda
+                        celulasVecinasVivas++;
+                    else
+                        celulasVecinasMuertas++;
+
+                    if(celulas[arriba][j].isVivo()) // Arriba
+                        celulasVecinasVivas++;
+                    else
+                        celulasVecinasMuertas++;
+
+                    if(celulas[arriba][derecha].isVivo()) // Arriba-Derecha
                         celulasVecinasVivas++;
                     else
                         celulasVecinasMuertas++;
 
                 }
 
-                if(i == PRIMERA && (j != PRIMERA && j != ULTIMA)) // Orilla izquierda, pero no es la primera ni última
+                if(i == ULTIMA && j == PRIMERA) // Esquina abajo-izquierda
                 {
 
-                    if(celulas[derecha][j].isVivo()) // Derecha
+                    if(celulas[i][derecha].isVivo()) // Derecha
                         celulasVecinasVivas++;
                     else
                         celulasVecinasMuertas++;
 
-                    if(celulas[derecha][abajo].isVivo()) // Derecha-Abajo
+                    if(celulas[arriba][j].isVivo()) // Arriba
                         celulasVecinasVivas++;
                     else
                         celulasVecinasMuertas++;
 
-                    if(celulas[i][abajo].isVivo()) // Abajo
+                    if(celulas[arriba][derecha].isVivo()) // Arriba-Derecha
                         celulasVecinasVivas++;
                     else
                         celulasVecinasMuertas++;
 
-                    if(celulas[i][arriba].isVivo()) // Arriba
+                }
+
+                if(j == PRIMERA && (i != PRIMERA && i != ULTIMA)) // Orilla izquierda, pero no es la primera ni última
+                {
+
+                    if(celulas[i][derecha].isVivo()) // Derecha
                         celulasVecinasVivas++;
                     else
                         celulasVecinasMuertas++;
 
-                    if(celulas[derecha][arriba].isVivo()) // Derecha-Arriba
+                    if(celulas[abajo][derecha].isVivo()) // Abajo-Derecha
+                        celulasVecinasVivas++;
+                    else
+                        celulasVecinasMuertas++;
+
+                    if(celulas[abajo][j].isVivo()) // Abajo
+                        celulasVecinasVivas++;
+                    else
+                        celulasVecinasMuertas++;
+
+                    if(celulas[arriba][j].isVivo()) // Arriba
+                        celulasVecinasVivas++;
+                    else
+                        celulasVecinasMuertas++;
+
+                    if(celulas[arriba][derecha].isVivo()) // Arriba-Derecha
                         celulasVecinasVivas++;
                     else
                         celulasVecinasMuertas++;
@@ -428,42 +426,42 @@ public class Tablero
                 if(i != PRIMERA && j != PRIMERA && i != ULTIMA && j != ULTIMA)
                 {
 
-                    if(celulas[derecha][j].isVivo()) // Derecha
+                    if(celulas[i][derecha].isVivo()) // Derecha
                         celulasVecinasVivas++;
                     else
                         celulasVecinasMuertas++;
 
-                    if(celulas[derecha][abajo].isVivo()) // Derecha-Abajo
+                    if(celulas[abajo][derecha].isVivo()) // Abajo-Derecha
                         celulasVecinasVivas++;
                     else
                         celulasVecinasMuertas++;
 
-                    if(celulas[i][abajo].isVivo())  // Abajo
+                    if(celulas[abajo][j].isVivo())  // Abajo
                         celulasVecinasVivas++;
                     else
                         celulasVecinasMuertas++;
 
-                    if(celulas[izquierda][abajo].isVivo())  // Izquierda-Abajo
+                    if(celulas[abajo][izquierda].isVivo())  // Abajo-Izquierda
                         celulasVecinasVivas++;
                     else
                         celulasVecinasMuertas++;
 
-                    if(celulas[izquierda][j].isVivo()) // Izquierda
+                    if(celulas[i][izquierda].isVivo()) // Izquierda
                         celulasVecinasVivas++;
                     else
                         celulasVecinasMuertas++;
 
-                    if(celulas[izquierda][arriba].isVivo()) // Izquierda-Arriba
+                    if(celulas[arriba][izquierda].isVivo()) // Arriba-Izquierda
                         celulasVecinasVivas++;
                     else
                         celulasVecinasMuertas++;
 
-                    if(celulas[i][arriba].isVivo()) // Arriba
+                    if(celulas[arriba][j].isVivo()) // Arriba
                         celulasVecinasVivas++;
                     else
                         celulasVecinasMuertas++;
 
-                    if(celulas[derecha][arriba].isVivo())  // Derecha-Arriba
+                    if(celulas[arriba][derecha].isVivo())  // Arriba-Derecha
                         celulasVecinasVivas++;
                     else
                         celulasVecinasMuertas++;
