@@ -20,9 +20,9 @@ public class Juego
         tablero.llenarTablero(tablero.getCelulas());
 
         if(manual == 'Y')
-            tablero.inicializarTableroAleatorio(obtenerCelulasRevivir(columnas, filas, porcentajeCelulasVivas));
-        else
             tablero.inicializarTableroManual(obtenerCelulasRevivir(columnas, filas, porcentajeCelulasVivas));
+        else
+            tablero.inicializarTableroAleatorio(obtenerCelulasRevivir(columnas, filas, porcentajeCelulasVivas));
 
         tableros.add(tablero);
 
@@ -46,7 +46,7 @@ public class Juego
             return true;
 
         }
-        catch (ArrayIndexOutOfBoundsException e) // Si no existe el indice que intentamos acceder
+        catch (IndexOutOfBoundsException e) // Si no existe el indice que intentamos acceder
         {
 
             return false;

@@ -40,7 +40,7 @@ public class Tablero
             for(int j = 0; j < tableroActual[i].length; j++)
             {
 
-                if(tableroActual[i][j] != tablerosAnteriores[i][j])
+                if(tableroActual[i][j].isVivo() != tablerosAnteriores[i][j].isVivo())
                 {
 
                     iguales = false;
@@ -136,40 +136,51 @@ public class Tablero
 
             System.out.println(contadorCelulas +" celulas de "+ celulasRevivir);
 
-            try
+            while(true)
             {
+                try{
+                    System.out.print("Introduzca la coordenada X del elemento "+ contadorCelulas +": ");
+                    fila = Integer.parseInt(entrada.nextLine());
 
-                System.out.print("Introduzca la coordenada X del elemento "+ contadorCelulas +": ");
-                columna = Integer.parseInt(entrada.nextLine());
+                    if(fila < 0 || fila > celulas.length - 1)
+                    {
 
-                if(columna < 0 || columna > celulas.length - 1)
+                        System.out.println("Ingrese un número entre 0 y "+ (celulas.length - 1) +", por favor.\n");
+                        continue;
+
+                    }
+                    break;
+                }
+                catch (NumberFormatException num)
                 {
 
-                    System.out.println("Ingrese un número entre 0 y "+ (celulas.length - 1) +", por favor.\n");
-                    continue;
+                    System.out.println("Ingrese un número por favor.\n");
 
                 }
+            }
 
-                System.out.print("Introduzca la coordenada Y del elemento "+ contadorCelulas +": ");
-                fila = Integer.parseInt(entrada.nextLine());
+            while(true)
+            {
+                try{
+                    System.out.print("Introduzca la coordenada Y del elemento "+ contadorCelulas +": ");
+                    columna = Integer.parseInt(entrada.nextLine());
 
-                if(fila < 0 || fila > celulas.length - 1)
+                    if(columna < 0 || columna > celulas.length - 1)
+                    {
+
+                        System.out.println("Ingrese un número entre 0 y "+ (celulas.length - 1) +", por favor.\n");
+                        continue;
+
+                    }
+                    break;
+                }
+                catch (NumberFormatException num)
                 {
 
-                    System.out.println("Ingrese un número entre 0 y "+ (celulas.length - 1) +", por favor.\n");
-                    continue;
+                    System.out.println("Ingrese un número por favor.\n");
 
                 }
-
             }
-            catch (NumberFormatException num)
-            {
-
-                System.out.println("Ingrese un número por favor.\n");
-                continue;
-
-            }
-
 
             if(celulas[columna][fila].isVivo())
             {
@@ -207,6 +218,8 @@ public class Tablero
                 int celulasVecinasVivas     = 0;
                 int celulasVecinasMuertas   = 0;
 
+                //int centroI = i;
+                //int centroJ = i;
                 int derecha     = i + 1;
                 int abajo       = j + 1;
                 int izquierda   = i - 1;
