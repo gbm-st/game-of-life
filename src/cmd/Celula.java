@@ -1,16 +1,18 @@
+package cmd;
+
 public class Celula
 {
 
     private boolean vivo;
 
     // CONSTANTES
-    static final boolean VIVIR = true;
-    static final boolean MORIR = false;
+    static final boolean VIVO = true;
+    static final boolean MUERTO = false;
 
     public Celula()
     {
 
-        this.vivo = MORIR;
+        this.vivo = MUERTO;
 
     }
 
@@ -21,24 +23,17 @@ public class Celula
 
     }
 
-    public void setVivo(boolean vivo)
-    {
-
-        this.vivo = vivo;
-
-    }
-
     public void matarCelula()
     {
 
-        vivo = MORIR;
+        vivo = MUERTO;
 
     }
 
     public void darVidaCelula()
     {
 
-        vivo = VIVIR;
+        vivo = VIVO;
 
     }
 

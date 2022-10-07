@@ -1,3 +1,5 @@
+package cmd;
+
 import java.util.ArrayList;
 
 public class Juego

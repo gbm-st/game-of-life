@@ -1,3 +1,5 @@
+package cmd;
+
 import java.security.SecureRandom;
 import java.util.Scanner;
 
@@ -66,7 +68,8 @@ public class Tablero
                 String caracter;
 
                 if(celulas[i][j].isVivo())
-                    caracter = "🦠";
+                    //caracter = "🦠";
+                    caracter = "🔴";
                 else
                     caracter = "☠";
 
@@ -103,19 +106,19 @@ public class Tablero
 
         int contadorCelulas = 1;
         SecureRandom aleatorio = new SecureRandom();
-        int columna;
-        int fila;
+        int columnaRandom;
+        int filaRandom;
 
         while (contadorCelulas <= celulasRevivir)
         {
 
-            columna = aleatorio.nextInt(columnas);
-            fila    = aleatorio.nextInt(filas);
+            columnaRandom = aleatorio.nextInt(this.columnas);
+            filaRandom    = aleatorio.nextInt(this.filas);
 
-            if(!celulas[columna][fila].isVivo())
+            if(!celulas[columnaRandom][filaRandom].isVivo())
             {
 
-                celulas[columna][fila].darVidaCelula();
+                celulas[columnaRandom][filaRandom].darVidaCelula();
                 contadorCelulas++;
 
             }
@@ -216,30 +219,25 @@ public class Tablero
             {
 
                 int celulasVecinasVivas     = 0;
-                int celulasVecinasMuertas   = 0;
 
                 int derecha     = j + 1;
                 int abajo       = i + 1;
                 int izquierda   = j - 1;
                 int arriba      = i - 1;
 
+                //System.out.println(celulas[i][j].isVivo() + " " + i + " " + j);
+
                 if(i == PRIMERA && j == PRIMERA) // Esquina arriba-izquierda
                 {
 
                     if(celulas[i][derecha].isVivo())  // Derecha
                         celulasVecinasVivas++;
-                    else
-                        celulasVecinasMuertas++;
 
                     if(celulas[abajo][derecha].isVivo()) // Abajo-Derecha
                         celulasVecinasVivas++;
-                    else
-                        celulasVecinasMuertas++;
 
                     if(celulas[abajo][j].isVivo()) // Abajo
                         celulasVecinasVivas++;
-                    else
-                        celulasVecinasMuertas++;
 
                 }
 
@@ -248,28 +246,18 @@ public class Tablero
 
                     if( celulas[i][derecha].isVivo()) // Derecha
                         celulasVecinasVivas++;
-                    else
-                        celulasVecinasMuertas++;
 
                     if( celulas[abajo][derecha].isVivo()) // Abajo-Derecha
                         celulasVecinasVivas++;
-                    else
-                        celulasVecinasMuertas++;
 
                     if( celulas[abajo][j].isVivo()) // Abajo
                         celulasVecinasVivas++;
-                    else
-                        celulasVecinasMuertas++;
 
                     if( celulas[abajo][izquierda].isVivo()) // Abajo-Izquierda
                         celulasVecinasVivas++;
-                    else
-                        celulasVecinasMuertas++;
 
                     if( celulas[i][izquierda].isVivo()) // Izquierda
                         celulasVecinasVivas++;
-                    else
-                        celulasVecinasMuertas++;
 
                 }
 
@@ -278,18 +266,12 @@ public class Tablero
 
                     if(celulas[abajo][j].isVivo())  // Abajo
                         celulasVecinasVivas++;
-                    else
-                        celulasVecinasMuertas++;
 
                     if(celulas[abajo][izquierda].isVivo())  // Abajo-Izquierda
                         celulasVecinasVivas++;
-                    else
-                        celulasVecinasMuertas++;
 
                     if(celulas[i][izquierda].isVivo()) // Izquierda
                         celulasVecinasVivas++;
-                    else
-                        celulasVecinasMuertas++;
 
                 }
 
@@ -298,28 +280,18 @@ public class Tablero
 
                     if(celulas[abajo][j].isVivo()) // Abajo
                         celulasVecinasVivas++;
-                    else
-                        celulasVecinasMuertas++;
 
                     if(celulas[abajo][izquierda].isVivo()) // Abajo-Izquierda
                         celulasVecinasVivas++;
-                    else
-                        celulasVecinasMuertas++;
 
                     if(celulas[i][izquierda].isVivo()) // Izquierda
                         celulasVecinasVivas++;
-                    else
-                        celulasVecinasMuertas++;
 
                     if(celulas[arriba][izquierda].isVivo()) // Arriba-Izquierda
                         celulasVecinasVivas++;
-                    else
-                        celulasVecinasMuertas++;
 
                     if(celulas[arriba][j].isVivo()) // Arriba
                         celulasVecinasVivas++;
-                    else
-                        celulasVecinasMuertas++;
 
                 }
 
@@ -328,18 +300,12 @@ public class Tablero
 
                     if(celulas[i][izquierda].isVivo()) // Izquierda
                         celulasVecinasVivas++;
-                    else
-                        celulasVecinasMuertas++;
 
                     if(celulas[arriba][izquierda].isVivo()) // Arriba-Izquierda
                         celulasVecinasVivas++;
-                    else
-                        celulasVecinasMuertas++;
 
                     if(celulas[arriba][j].isVivo()) // Arriba
                         celulasVecinasVivas++;
-                    else
-                        celulasVecinasMuertas++;
 
                 }
 
@@ -348,28 +314,18 @@ public class Tablero
 
                     if(celulas[i][derecha].isVivo()) // Derecha
                         celulasVecinasVivas++;
-                    else
-                        celulasVecinasMuertas++;
 
                     if(celulas[i][izquierda].isVivo()) // Izquierda
                         celulasVecinasVivas++;
-                    else
-                        celulasVecinasMuertas++;
 
                     if(celulas[arriba][izquierda].isVivo())  // Arriba-Izquierda
                         celulasVecinasVivas++;
-                    else
-                        celulasVecinasMuertas++;
 
                     if(celulas[arriba][j].isVivo()) // Arriba
                         celulasVecinasVivas++;
-                    else
-                        celulasVecinasMuertas++;
 
                     if(celulas[arriba][derecha].isVivo()) // Arriba-Derecha
                         celulasVecinasVivas++;
-                    else
-                        celulasVecinasMuertas++;
 
                 }
 
@@ -378,18 +334,12 @@ public class Tablero
 
                     if(celulas[i][derecha].isVivo()) // Derecha
                         celulasVecinasVivas++;
-                    else
-                        celulasVecinasMuertas++;
 
                     if(celulas[arriba][j].isVivo()) // Arriba
                         celulasVecinasVivas++;
-                    else
-                        celulasVecinasMuertas++;
 
                     if(celulas[arriba][derecha].isVivo()) // Arriba-Derecha
                         celulasVecinasVivas++;
-                    else
-                        celulasVecinasMuertas++;
 
                 }
 
@@ -398,28 +348,18 @@ public class Tablero
 
                     if(celulas[i][derecha].isVivo()) // Derecha
                         celulasVecinasVivas++;
-                    else
-                        celulasVecinasMuertas++;
 
                     if(celulas[abajo][derecha].isVivo()) // Abajo-Derecha
                         celulasVecinasVivas++;
-                    else
-                        celulasVecinasMuertas++;
 
                     if(celulas[abajo][j].isVivo()) // Abajo
                         celulasVecinasVivas++;
-                    else
-                        celulasVecinasMuertas++;
 
                     if(celulas[arriba][j].isVivo()) // Arriba
                         celulasVecinasVivas++;
-                    else
-                        celulasVecinasMuertas++;
 
                     if(celulas[arriba][derecha].isVivo()) // Arriba-Derecha
                         celulasVecinasVivas++;
-                    else
-                        celulasVecinasMuertas++;
 
                 }
 
@@ -428,47 +368,31 @@ public class Tablero
 
                     if(celulas[i][derecha].isVivo()) // Derecha
                         celulasVecinasVivas++;
-                    else
-                        celulasVecinasMuertas++;
 
                     if(celulas[abajo][derecha].isVivo()) // Abajo-Derecha
                         celulasVecinasVivas++;
-                    else
-                        celulasVecinasMuertas++;
 
                     if(celulas[abajo][j].isVivo())  // Abajo
                         celulasVecinasVivas++;
-                    else
-                        celulasVecinasMuertas++;
 
                     if(celulas[abajo][izquierda].isVivo())  // Abajo-Izquierda
                         celulasVecinasVivas++;
-                    else
-                        celulasVecinasMuertas++;
 
                     if(celulas[i][izquierda].isVivo()) // Izquierda
                         celulasVecinasVivas++;
-                    else
-                        celulasVecinasMuertas++;
 
                     if(celulas[arriba][izquierda].isVivo()) // Arriba-Izquierda
                         celulasVecinasVivas++;
-                    else
-                        celulasVecinasMuertas++;
 
                     if(celulas[arriba][j].isVivo()) // Arriba
                         celulasVecinasVivas++;
-                    else
-                        celulasVecinasMuertas++;
 
                     if(celulas[arriba][derecha].isVivo())  // Arriba-Derecha
                         celulasVecinasVivas++;
-                    else
-                        celulasVecinasMuertas++;
 
                 }
 
-                valorarVidaCelula(temporarlCelulas[i][j], celulasVecinasVivas, celulasVecinasMuertas);
+                valorarVidaCelula(temporarlCelulas[i][j], celulasVecinasVivas);
 
             }
 
@@ -481,16 +405,19 @@ public class Tablero
     private void copiarCelulas(Celula[][] origen, Celula[][] destino)
     {
 
-        final boolean vivo      = true;
-        final boolean muerto    = false;
-
-       for (int i = 0; i < origen.length; i++)
-           for(int j = 0; j < origen[i].length; j++)
-               destino[i][j].setVivo(origen[i][j].isVivo() ? vivo : muerto);
+       for (int i = 0; i < origen.length; i++) {
+           for (int j = 0; j < origen[i].length; j++) {
+               if (origen[i][j].isVivo() == Celula.VIVO) {
+                   destino[i][j].darVidaCelula();
+               } else if (origen[i][j].isVivo() == Celula.MUERTO) {
+                   destino[i][j].matarCelula();
+               }
+           }
+       }
 
     }
 
-    private void valorarVidaCelula(Celula celula, int celulasVecinasVivas, int celulasVecinasMuertas)
+    private void valorarVidaCelula(Celula celula, int celulasVecinasVivas)
     {
 
         if(!celula.isVivo()) // Una célula muerta con exactamente 3 células vecinas vivas "nace" (al turno siguiente estará viva).

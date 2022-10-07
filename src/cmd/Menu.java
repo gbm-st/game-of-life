@@ -1,38 +1,41 @@
+package cmd;
+
 import java.util.Scanner;
 
-public class Main
+public class Menu
 {
-
+    private int filas                   = 0;
+    private int columnas                = 0;
+    private String enter;
+    private int numeroJuego             = 1;
+    private int porcentajeCelulasVivas  = 0;
+    private char manual                 = 'N';
+    private Juego juego = new Juego();
+    private Scanner entrada = new Scanner(System.in);
     static final int LIMITE_INFERIOR_TABLERO = 0;
     static final int LIMITE_SUPERIOR_TABLERO = 25;
     static final int LIMITE_INFERIOR_PORCENTAJE = 0;
     static final int LIMITE_SUPERIOR_PORCENTAJE = 100;
-
-    public static void main(String[] args)
+    public void inicio()
     {
 
-        menu();
+        System.out.println("---------------Game of Life---------------");
+        System.out.println("CMD.Juego número: "+ numeroJuego);
+
+        filasColumnas();
+
+        porcentajeCelulas();
+
+        introducirCelulas();
+
+        compararTablero();
 
     }
 
-    private static void menu()
+    private void filasColumnas()
     {
-
-        String enter;
-        int numeroJuego             = 1;
-        int filas                   = 0;
-        int columnas                = 0;
-        int porcentajeCelulasVivas  = 0;
-        char manual                 = 'N';
-
-        Juego juego = new Juego();
-        Scanner entrada = new Scanner(System.in);
-
-        System.out.println("---------------Game of Life---------------");
-        System.out.println("Juego número: "+ numeroJuego);
-
-
-        while(true) {
+        while(true)
+        {
             try {
                 System.out.print("Ingrese el numero de filas y columnas (0 a 25): ");
 
@@ -54,7 +57,10 @@ public class Main
         }
 
         filas = columnas;
+    }
 
+    private void porcentajeCelulas()
+    {
         while(true)
         {
             try {
@@ -78,7 +84,10 @@ public class Main
 
             }
         }
+    }
 
+    private void introducirCelulas()
+    {
         while(true)
         {
 
@@ -100,7 +109,10 @@ public class Main
 
         juego.iniciarJuego(columnas, filas, porcentajeCelulasVivas, manual);
         juego.dibujarTablero();
+    }
 
+    private void compararTablero()
+    {
         while (!juego.compararTablero())
         {
 
@@ -111,7 +123,7 @@ public class Main
                 break;
 
             juego.siguientePartida(columnas, filas);
-            System.out.println("Juego número: "+ numeroJuego);
+            System.out.println("CMD.Juego número: "+ numeroJuego);
             juego.dibujarTablero();
 
             numeroJuego++;
@@ -119,7 +131,5 @@ public class Main
         }
 
         System.out.println("Adios");
-
     }
-
 }
