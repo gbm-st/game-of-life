@@ -5,10 +5,8 @@ public class Menu
 {
     private int filas                   = 0;
     private int columnas                = 0;
-    private String enter;
     private int numeroJuego             = 1;
     private int porcentajeCelulasVivas  = 0;
-    private char manual                 = 'N';
     private Juego juego = new Juego();
     private Scanner entrada = new Scanner(System.in);
     static final int LIMITE_INFERIOR_TABLERO = 0;
@@ -87,6 +85,8 @@ public class Menu
 
     private void introducirCelulas()
     {
+        char manual                 = 'N';
+
         while(true)
         {
 
@@ -112,6 +112,8 @@ public class Menu
 
     private void compararTablero()
     {
+        String enter;
+
         while (!juego.compararTablero())
         {
 
@@ -128,6 +130,8 @@ public class Menu
             numeroJuego++;
 
         }
+
+        entrada.close();
 
         System.out.println("Adios");
     }
