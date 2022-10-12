@@ -17,7 +17,7 @@ public class Menu
     {
 
         System.out.println("---------------Game of Life---------------");
-        System.out.println("CMD.Juego número: "+ numeroJuego);
+        System.out.println("Juego número: "+ numeroJuego);
 
         filasColumnas();
 
@@ -124,7 +124,7 @@ public class Menu
                 break;
 
             juego.siguientePartida(columnas, filas);
-            System.out.println("CMD.Juego número: "+ numeroJuego);
+            System.out.println("Juego número: "+ numeroJuego);
             juego.dibujarTablero();
 
             numeroJuego++;

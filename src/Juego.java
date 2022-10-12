@@ -79,16 +79,16 @@ public class Juego
     public void siguientePartida(int columnas, int filas)
     {
 
-        Tablero tablero = new Tablero(columnas, filas);
+        Tablero tableroNuevo = new Tablero(columnas, filas);
 
-        tablero.llenarTablero(tablero.getCelulas());
+        tableroNuevo.llenarTablero(tableroNuevo.getCelulas());
 
         // Obtenemos el último tablero y el tablero actual
-        tablero.copiarCelulasTableroAnterior(tableros.get(tableros.size() - 1), tablero);
+        tableroNuevo.setCelulas(tableroNuevo.copiarCelulas(tableros.get(tableros.size() - 1).getCelulas(), tableroNuevo.getCelulas()));
 
-        tablero.vidaVecinos();
+        tableroNuevo.setCelulas(tableroNuevo.vidaVecinos());
 
-        tableros.add(tablero);
+        tableros.add(tableroNuevo);
 
     }
 
