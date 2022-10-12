@@ -5,7 +5,7 @@ public class Menu
 {
     private int filas                   = 0;
     private int columnas                = 0;
-    private int numeroJuego             = 1;
+    private int numeroGeneracion        = 1;
     private int porcentajeCelulasVivas  = 0;
     private Juego juego = new Juego();
     private Scanner entrada = new Scanner(System.in);
@@ -17,7 +17,7 @@ public class Menu
     {
 
         System.out.println("---------------Game of Life---------------");
-        System.out.println("Juego número: "+ numeroJuego);
+        System.out.println("Juego número: "+ numeroGeneracion);
 
         filasColumnas();
 
@@ -25,7 +25,7 @@ public class Menu
 
         introducirCelulas();
 
-        compararTablero();
+        jugar();
 
     }
 
@@ -85,7 +85,7 @@ public class Menu
 
     private void introducirCelulas()
     {
-        char manual                 = 'N';
+        char manual = 'N';
 
         while(true)
         {
@@ -104,13 +104,13 @@ public class Menu
             break;
         }
 
-        numeroJuego++;
+        numeroGeneracion++;
 
         juego.iniciarJuego(columnas, filas, porcentajeCelulasVivas, manual);
         juego.dibujarTablero();
     }
 
-    private void compararTablero()
+    private void jugar()
     {
         String enter;
 
@@ -124,10 +124,10 @@ public class Menu
                 break;
 
             juego.siguientePartida(columnas, filas);
-            System.out.println("Juego número: "+ numeroJuego);
+            System.out.println("Juego número: "+ numeroGeneracion);
             juego.dibujarTablero();
 
-            numeroJuego++;
+            numeroGeneracion++;
 
         }
 

@@ -18,8 +18,6 @@ public class Juego
 
         Tablero tablero = new Tablero(columnas, filas);
 
-        tablero.llenarTablero(tablero.getCelulas());
-
         if(manual == 'Y')
             tablero.inicializarTableroManual(obtenerCelulasRevivir(columnas, filas, porcentajeCelulasVivas));
         else
@@ -80,8 +78,6 @@ public class Juego
     {
 
         Tablero tableroNuevo = new Tablero(columnas, filas);
-
-        tableroNuevo.llenarTablero(tableroNuevo.getCelulas());
 
         // Obtenemos el último tablero y el tablero actual
         tableroNuevo.setCelulas(tableroNuevo.copiarCelulas(tableros.get(tableros.size() - 1).getCelulas(), tableroNuevo.getCelulas()));

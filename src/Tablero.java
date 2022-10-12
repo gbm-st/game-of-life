@@ -82,24 +82,6 @@ public class Tablero
 
     }
 
-    public void llenarTablero(boolean[][] celulas)
-    {
-
-        for(int i  = 0; i < celulas.length; i++)
-        {
-
-            for(int j = 0; j < celulas[i].length; j++)
-            {
-
-                boolean celula = false;
-                celulas[i][j] = celula;
-
-            }
-
-        }
-
-    }
-
     public void inicializarTableroAleatorio(int celulasRevivir)
     {
 
@@ -205,11 +187,9 @@ public class Tablero
         final int PRIMERA   = 0;
         final int ULTIMA    = celulas.length - 1;
 
-        boolean[][] temporarlCelulas = new boolean[columnas][filas];
+        boolean[][] celulasTemporales = new boolean[columnas][filas];
 
-        llenarTablero(temporarlCelulas);
-
-        temporarlCelulas = copiarCelulas(celulas, temporarlCelulas);
+        celulasTemporales = copiarCelulas(celulas, celulasTemporales);
 
         for(int i  = 0; i < celulas.length; i++)
         {
@@ -391,13 +371,13 @@ public class Tablero
 
                 }
 
-                temporarlCelulas[i][j] = valorarVidaCelula(temporarlCelulas[i][j], celulasVecinasVivas);
+                celulasTemporales[i][j] = valorarVidaCelula(celulasTemporales[i][j], celulasVecinasVivas);
 
             }
 
         }
 
-        return copiarCelulas(temporarlCelulas, celulas);
+        return copiarCelulas(celulasTemporales, celulas);
 
     }
 
@@ -431,12 +411,12 @@ public class Tablero
             if(celulasVecinasVivas == 0 || celulasVecinasVivas == 1)
             {
 
-                return celula=false;
+                return celula = false;
 
             }
 
         if (celulasVecinasVivas > 3) // Una célula que tenga más de 3 vecinas vivas o permanece muerta o muere por "sobrepoblación".
-            return celula=false;
+            return celula = false;
 
         return celula;
     }
