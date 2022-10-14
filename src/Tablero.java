@@ -394,29 +394,26 @@ public class Tablero
 
     private boolean valorarVidaCelula(boolean celula, int celulasVecinasVivas)
     {
+        final boolean VIVO = true;
+
+        final boolean MUERTO = false;
 
         if(!celula) // Una célula muerta con exactamente 3 células vecinas vivas "nace" (al turno siguiente estará viva).
             if(celulasVecinasVivas == 3)
-            {
-
-                return celula = true;
-
-            }
-
-        if(celula) // Una célula viva con 2 o 3 células vecinas vivas sigue viva.
-            if(celulasVecinasVivas == 2 || celulasVecinasVivas == 3)
-                return celula;
+                return VIVO;
 
         if(celula) // Una célula viva que tenga 0 o 1 células vecinas muere por “soledad“.
-            if(celulasVecinasVivas == 0 || celulasVecinasVivas == 1)
-            {
+        {
 
-                return celula = false;
+            if(celulasVecinasVivas == 2 || celulasVecinasVivas == 3)
+                return VIVO;
 
-            }
+            if (celulasVecinasVivas == 0 || celulasVecinasVivas == 1)
+                return MUERTO;
+        }
 
         if (celulasVecinasVivas > 3) // Una célula que tenga más de 3 vecinas vivas o permanece muerta o muere por "sobrepoblación".
-            return celula = false;
+            return MUERTO;
 
         return celula;
     }
